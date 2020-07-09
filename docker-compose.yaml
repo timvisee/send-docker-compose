@@ -4,6 +4,7 @@ services:
   send-proxy:
     container_name: send-proxy
     image: 'jwilder/nginx-proxy:alpine'
+    restart: always
     ports:
       - '80:80'
       - '443:443'
@@ -16,6 +17,7 @@ services:
       - proxy-html:/usr/share/nginx/html
   proxy-letsencrypt:
     image: 'jrcs/letsencrypt-nginx-proxy-companion'
+    restart: always
     environment:
       - DEFAULT_EMAIL=${LETSENCRYPT_EMAIL}
       - NGINX_PROXY_CONTAINER=send-proxy
@@ -27,6 +29,7 @@ services:
       - proxy-html:/usr/share/nginx/html
   send:
     image: 'mozilla/send:latest'
+    restart: always
     ports:
       - '1234:1234'
     environment:
@@ -38,6 +41,7 @@ services:
       - REDIS_HOST=redis
   redis:
     image: 'redis:alpine'
+    restart: always
     volumes:
       - send-redis:/data
 
