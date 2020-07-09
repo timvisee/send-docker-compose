@@ -25,8 +25,9 @@ DOCKER_SEND_IMAGE=mozilla/send:latest
 # Host to expose Send on
 HOST=send.example.org
 
-# Base URL for Send
-SEND_BASE_URL=https://send.example.org
+# Some exposed Send properties, see Send configuration
+SEND_BASE_URL=
+SEND_FILE_DIR=
 
 # Optional: for LetsEncrypt SSL, same as HOST
 LETSENCRYPT_HOST=

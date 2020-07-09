@@ -42,6 +42,7 @@ services:
       - PORT=1234
       - REDIS_HOST=redis
       - BASE_URL=${SEND_BASE_URL}
+      - FILE_DIR=${SEND_FILE_DIR}
   redis:
     image: 'redis:alpine'
     restart: always
