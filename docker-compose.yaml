@@ -40,6 +40,7 @@ services:
       - LETSENCRYPT_EMAIL
       - PORT=1234
       - REDIS_HOST=redis
+      - BASE_URL=${SEND_BASE_URL}
   redis:
     image: 'redis:alpine'
     restart: always
