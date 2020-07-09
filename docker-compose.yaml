@@ -38,6 +38,7 @@ services:
       - DHPARAM_GENERATION=false
       - LETSENCRYPT_HOST
       - LETSENCRYPT_EMAIL
+      - NODE_ENV=production
       - PORT=1234
       - REDIS_HOST=redis
       - BASE_URL=${SEND_BASE_URL}
