@@ -12,9 +12,9 @@
 # Host to expose Send on
 HOST=send.example.org
 
-# Optional: for LetsEncrypt SSL, your email address
-LETSENCRYPT_EMAIL=mail@example.org
-
 # Optional: for LetsEncrypt SSL, same as HOST
 LETSENCRYPT_HOST=
+
+# Optional: for LetsEncrypt SSL, your email address
+LETSENCRYPT_EMAIL=mail@example.org
 ```

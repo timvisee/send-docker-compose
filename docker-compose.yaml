@@ -12,7 +12,7 @@ services:
       - DEFAULT_HOST=${HOST}
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
-      - proxy-certs:/etc/nginx/certs
+      - proxy-certs:/etc/nginx/certs:ro
       - proxy-vhost:/etc/nginx/vhost.d
       - proxy-html:/usr/share/nginx/html
   proxy-letsencrypt:
@@ -20,6 +20,8 @@ services:
     restart: always
     environment:
       - DEFAULT_EMAIL=${LETSENCRYPT_EMAIL}
+      - NGINX_PROXY_CONTAINER=nginx-proxy
+      - NGINX_DOCKER_GEN_CONTAINER=nginx-proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - proxy-certs:/etc/nginx/certs
@@ -35,6 +37,7 @@ services:
       - VIRTUAL_PORT=1234
       - DHPARAM_GENERATION=false
       - LETSENCRYPT_HOST
+      - LETSENCRYPT_EMAIL
       - PORT=1234
       - REDIS_HOST=redis
   redis:
