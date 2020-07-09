@@ -1,0 +1,45 @@
+version: "3"
+
+services:
+  proxy:
+    image: 'jwilder/nginx-proxy:alpine'
+    ports:
+      - '80:80'
+      - '443:443'
+    environment:
+      - DEFAULT_HOST=${HOST}
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - proxy-certs:/etc/nginx/certs
+      - proxy-vhost:/etc/nginx/vhost.d
+      - proxy-html:/usr/share/nginx/html
+  proxy-letsencrypt:
+    image: 'jrcs/letsencrypt-nginx-proxy-companion'
+    environment:
+      - DEFAULT_EMAIL=${LETSENCRYPT_EMAIL}
+    volumes:
+      - /var/run/docker.sock:/tmp/docker.sock:ro
+      - proxy-certs:/etc/nginx/certs
+      - proxy-vhost:/etc/nginx/vhost.d
+      - proxy-html:/usr/share/nginx/html
+  send:
+    image: 'mozilla/send:latest'
+    ports:
+      - '1234:1234'
+    environment:
+      - VIRTUAL_HOST=${HOST}
+      - VIRTUAL_PORT=1234
+      - DHPARAM_GENERATION=false
+      - LETSENCRYPT_HOST
+      - PORT=1234
+      - REDIS_HOST=redis
+  redis:
+    image: 'redis:alpine'
+    volumes:
+      - send-redis:/data
+
+volumes:
+  send-redis:
+  proxy-certs:
+  proxy-vhost:
+  proxy-html:
