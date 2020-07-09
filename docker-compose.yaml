@@ -1,7 +1,8 @@
 version: "3"
 
 services:
-  proxy:
+  send-proxy:
+    name: send-proxy
     image: 'jwilder/nginx-proxy:alpine'
     ports:
       - '80:80'
@@ -17,8 +18,8 @@ services:
     image: 'jrcs/letsencrypt-nginx-proxy-companion'
     environment:
       - DEFAULT_EMAIL=${LETSENCRYPT_EMAIL}
-      - NGINX_PROXY_CONTAINER=proxy
-      - NGINX_DOCKER_GEN_CONTAINER=proxy
+      - NGINX_PROXY_CONTAINER=send-proxy
+      - NGINX_DOCKER_GEN_CONTAINER=send-proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - proxy-certs:/etc/nginx/certs
