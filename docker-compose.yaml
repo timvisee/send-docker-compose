@@ -17,6 +17,7 @@ services:
     image: 'jrcs/letsencrypt-nginx-proxy-companion'
     environment:
       - DEFAULT_EMAIL=${LETSENCRYPT_EMAIL}
+      - NGINX_PROXY_CONTAINER=proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - proxy-certs:/etc/nginx/certs
