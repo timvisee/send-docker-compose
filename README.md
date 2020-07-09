@@ -8,11 +8,13 @@
 - Visit your domain
 
 ### Example .env
-```.env
+```bash
 # Host to expose Send on
-HOST=myhost
+HOST=send.example.org
 
-# Configure these to enable automatic LetsEncrypt certificate generation
+# Optional: for LetsEncrypt SSL, your email address
 LETSENCRYPT_EMAIL=mail@example.org
+
+# Optional: for LetsEncrypt SSL, same as HOST
 LETSENCRYPT_HOST=
 ```
