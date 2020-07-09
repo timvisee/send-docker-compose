@@ -19,6 +19,9 @@ See [docker-compose.yaml](./docker-compose.yaml).
 
 ### Example .env
 ```bash
+# Docker image to use for Send
+DOCKER_SEND_IMAGE=mozilla/send:latest
+
 # Host to expose Send on
 HOST=send.example.org
 

@@ -28,7 +28,7 @@ services:
       - proxy-vhost:/etc/nginx/vhost.d
       - proxy-html:/usr/share/nginx/html
   send:
-    image: 'mozilla/send:latest'
+    image: '${DOCKER_SEND_IMAGE}'
     restart: always
     ports:
       - '1234:1234'
