@@ -2,7 +2,7 @@ version: "3"
 
 services:
   send-proxy:
-    name: send-proxy
+    container_name: send-proxy
     image: 'jwilder/nginx-proxy:alpine'
     ports:
       - '80:80'
