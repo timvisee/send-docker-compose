@@ -1,8 +1,8 @@
 version: "3"
 
 services:
-  send-proxy:
-    container_name: send-proxy
+  nginx-proxy:
+    container_name: nginx-proxy
     image: 'jwilder/nginx-proxy:alpine'
     restart: always
     ports:
@@ -20,8 +20,6 @@ services:
     restart: always
     environment:
       - DEFAULT_EMAIL=${LETSENCRYPT_EMAIL}
-      - NGINX_PROXY_CONTAINER=send-proxy
-      - NGINX_DOCKER_GEN_CONTAINER=send-proxy
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
       - proxy-certs:/etc/nginx/certs
