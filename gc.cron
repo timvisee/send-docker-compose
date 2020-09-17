@@ -1,0 +1,7 @@
+# Set this up as hourly cronjob to delete old files, that Send forgot to remove
+# itself.
+#
+# Run `crontab -e` and add the line below, and configure the correct path.
+
+# Delete leaked Send upload files older than 1 day (and a bit) every hour
+0 * * * * find /mnt/send01_volume/uploads/ -mmin +1450 -exec rm {} \;
