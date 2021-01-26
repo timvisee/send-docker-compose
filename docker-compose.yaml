@@ -32,6 +32,8 @@ services:
     restart: always
     ports:
       - '1234:1234'
+    volumes:
+      - ./uploads:/uploads
     environment:
       - VIRTUAL_HOST=${HOST}
       - VIRTUAL_PORT=1234
@@ -39,9 +41,27 @@ services:
       - LETSENCRYPT_HOST
       - LETSENCRYPT_EMAIL
       - NODE_ENV=production
+      - BASE_URL=${SEND_BASE_URL}
       - PORT=1234
       - REDIS_HOST=redis
-      - BASE_URL=${SEND_BASE_URL}
+
+      # For local uploads storage
+      - FILE_DIR=/uploads
+
+      # For S3 object storage (disable volume and FILE_DIR variable)
+      # - AWS_ACCESS_KEY_ID=********
+      # - AWS_SECRET_ACCESS_KEY=********
+      # - S3_BUCKET=send
+      # - S3_ENDPOINT=s3.us-west-2.amazonaws.com
+      # - S3_USE_PATH_STYLE_ENDPOINT=true
+
+      # To customize upload limits
+      # - ANON_MAX_EXPIRE_SECONDS=604800
+      # - MAX_EXPIRE_SECONDS=604800
+      # - ANON_MAX_DOWNLOADS=20
+      # - MAX_DOWNLOADS=20
+      # - ANON_MAX_FILE_SIZE=2684354560
+      # - MAX_FILE_SIZE=2684354560
   redis:
     image: 'redis:alpine'
     restart: always
