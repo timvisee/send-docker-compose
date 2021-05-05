@@ -3,5 +3,11 @@
 #
 # Run `crontab -e` and add the line below, and configure the correct path.
 
-# Delete leaked Send upload files older than 1 day (and a bit) every hour
-0 * * * * find /mnt/send01_volume/uploads/ -mmin +1450 -exec rm {} \;
+# Delete leaked Send upload files older than 7 days (and a bit) every hour
+0 * * * * find /var/lib/send/uploads/ -mmin +10130 -exec rm {} \;
+
+# Uploads have their lifetime in days prefixed, so you can be a little bit
+# smarter with cleaning up:
+#
+# 0 * * * * find /var/lib/send/uploads/ -name 7-\* -mmin +10130 -exec rm {} \;
+# 0 * * * * find /var/lib/send/uploads/ -name 1-\* -mmin +1500 -exec rm {} \;
