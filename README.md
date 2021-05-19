@@ -28,6 +28,8 @@ See [docker-compose.yaml](./docker-compose.yaml).
 
 <img src="https://i.imgur.com/eyvrWAP.png" alt="Screenshot of succesfully running Send UI" width="450px"/>
 
+*Note: the server will autostart on boot (to disable, change all the `restart: always` lines to `restart: on-failure`)*
+
 ## Example .env
 
 ```bash
