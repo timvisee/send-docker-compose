@@ -15,6 +15,7 @@ services:
       - proxy-certs:/etc/nginx/certs:ro
       - proxy-vhost:/etc/nginx/vhost.d
       - proxy-html:/usr/share/nginx/html
+  
   proxy-letsencrypt:
     image: 'jrcs/letsencrypt-nginx-proxy-companion'
     restart: always
@@ -27,6 +28,7 @@ services:
       - proxy-certs:/etc/nginx/certs
       - proxy-vhost:/etc/nginx/vhost.d
       - proxy-html:/usr/share/nginx/html
+  
   send:
     image: '${DOCKER_SEND_IMAGE}'
     restart: always
@@ -56,14 +58,16 @@ services:
       # - S3_USE_PATH_STYLE_ENDPOINT=true
 
       # To customize upload limits
-      # - ANON_MAX_EXPIRE_SECONDS=604800
-      # - MAX_EXPIRE_SECONDS=604800
-      # - ANON_MAX_DOWNLOADS=20
-      # - MAX_DOWNLOADS=20
-      # - ANON_MAX_FILE_SIZE=2684354560
+      # - EXPIRE_TIMES_SECONDS=3600,86400,604800,2592000,31536000
+      # - DEFAULT_EXPIRE_SECONDS=3600
+      # - MAX_EXPIRE_SECONDS=31536000
+      # - DOWNLOAD_COUNTS=1,2,5,10,15,25,50,100,1000
+      # - MAX_DOWNLOADS=1000
       # - MAX_FILE_SIZE=2684354560
+  
   redis:
     image: 'redis:alpine'
+    command: redis-server --appendonly yes
     restart: always
     volumes:
       - send-redis:/data
