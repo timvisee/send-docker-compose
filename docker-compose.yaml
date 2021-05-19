@@ -67,7 +67,6 @@ services:
   
   redis:
     image: 'redis:alpine'
-    command: redis-server --appendonly yes
     restart: always
     volumes:
       - send-redis:/data
