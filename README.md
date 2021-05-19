@@ -46,7 +46,7 @@ LETSENCRYPT_EMAIL=mail@example.org
 
 ### Configuration
 
-All the config options and their defaults can be found here: https://github.com/timvisee/send/blob/master/server/config.js.
+All the config options and their defaults can be found here: https://github.com/timvisee/send/blob/master/server/config.js
 
 Config options expecting array values (e.g. `EXPIRE_TIMES_SECONDS`, `DOWNLOAD_COUNTS`) are parsed as CSV, and the first entry is the default.
 
