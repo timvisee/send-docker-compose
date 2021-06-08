@@ -10,6 +10,7 @@ services:
       - '443:443'
     environment:
       - DEFAULT_HOST=${HOST}
+      - HSTS=off
     volumes:
       - /var/run/docker.sock:/tmp/docker.sock:ro
       - proxy-certs:/etc/nginx/certs:ro
