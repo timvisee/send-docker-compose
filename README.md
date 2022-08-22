@@ -88,3 +88,8 @@ services:
       - EXPIRE_TIMES_SECONDS=86400,3600,86400,604800,2592000,31536000,157680000
       - DOWNLOAD_COUNTS=10,1,2,5,10,15,25,50,100,1000,10000,100000,250000
 ```
+
+
+### Infrastructure model
+
+![Infrastructure model](.infragenie/infrastructure_model.png)
