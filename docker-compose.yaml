@@ -29,6 +29,7 @@ services:
       - proxy-certs:/etc/nginx/certs
       - proxy-vhost:/etc/nginx/vhost.d
       - proxy-html:/usr/share/nginx/html
+      - acme:/etc/acme.sh
   
   send:
     image: '${DOCKER_SEND_IMAGE}'
@@ -77,3 +78,4 @@ volumes:
   proxy-certs:
   proxy-vhost:
   proxy-html:
+  acme:
