@@ -1,0 +1,7 @@
+{
+	email {$LETSENCRYPT_EMAIL}
+}
+
+{$HOST} {
+	reverse_proxy send:1234
+}

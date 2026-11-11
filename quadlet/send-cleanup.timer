@@ -1,0 +1,10 @@
+[Unit]
+Description=Hourly cleanup of leaked Send upload files
+
+[Timer]
+OnCalendar=hourly
+Persistent=true
+RandomizedDelaySec=5min
+
+[Install]
+WantedBy=timers.target

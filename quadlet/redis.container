@@ -1,0 +1,15 @@
+[Unit]
+Description=Redis for Send
+
+[Container]
+ContainerName=redis
+Image=docker.io/library/redis:alpine
+AutoUpdate=registry
+Network=send.network
+Volume=send-redis.volume:/data
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

@@ -1,0 +1,15 @@
+[Unit]
+Description=Delete leaked Send upload files
+
+[Container]
+ContainerName=send-cleanup
+Image=docker.io/library/alpine:latest
+Volume=%h/send/uploads:/uploads:Z
+UserNS=keep-id:uid=1000,gid=1000
+User=1000:1000
+# Delete files older than 7 days (and a bit), same rule as ../gc.cron
+Exec=find /uploads -type f -mmin +10130 -print -delete
+
+[Service]
+Type=oneshot
+# No [Install] section: started by send-cleanup.timer
