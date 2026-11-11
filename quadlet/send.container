@@ -1,0 +1,44 @@
+[Unit]
+Description=Send (file sharing)
+Requires=redis.service
+After=redis.service
+
+[Container]
+ContainerName=send
+# Image to run; change it here (e.g. docker.io/mozilla/send:latest)
+Image=registry.gitlab.com/timvisee/send:latest
+AutoUpdate=registry
+Network=send.network
+# No published port: Caddy reaches Send over the "send" network
+Volume=%h/send/uploads:/uploads:Z
+# Rootless: map the host user to the image's "app" user (1000) so the uploads
+# directory is writable
+UserNS=keep-id:uid=1000,gid=1000
+EnvironmentFile=%h/.config/send/send.env
+Environment=NODE_ENV=production
+Environment=PORT=1234
+Environment=REDIS_HOST=redis
+
+# Local uploads storage
+Environment=FILE_DIR=/uploads
+
+# S3 object storage (remove the uploads volume and FILE_DIR above)
+# Environment=AWS_ACCESS_KEY_ID=********
+# Environment=AWS_SECRET_ACCESS_KEY=********
+# Environment=S3_BUCKET=send
+# Environment=S3_ENDPOINT=s3.us-west-2.amazonaws.com
+# Environment=S3_USE_PATH_STYLE_ENDPOINT=true
+
+# Upload limits
+# Environment=EXPIRE_TIMES_SECONDS=3600,86400,604800,2592000,31536000
+# Environment=DEFAULT_EXPIRE_SECONDS=3600
+# Environment=MAX_EXPIRE_SECONDS=31536000
+# Environment=DOWNLOAD_COUNTS=1,2,5,10,15,25,50,100,1000
+# Environment=MAX_DOWNLOADS=1000
+# Environment=MAX_FILE_SIZE=2684354560
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target

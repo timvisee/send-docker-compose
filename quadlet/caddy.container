@@ -1,0 +1,23 @@
+[Unit]
+Description=Caddy reverse proxy for Send (automatic HTTPS)
+Requires=send.service
+After=send.service
+
+[Container]
+ContainerName=caddy
+Image=docker.io/library/caddy:alpine
+AutoUpdate=registry
+Network=send.network
+PublishPort=80:80
+PublishPort=443:443
+PublishPort=443:443/udp
+EnvironmentFile=%h/.config/send/send.env
+Volume=%h/.config/send/Caddyfile:/etc/caddy/Caddyfile:ro,Z
+Volume=caddy-data.volume:/data
+Volume=caddy-config.volume:/config
+
+[Service]
+Restart=always
+
+[Install]
+WantedBy=default.target
